@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.scss';
+import { Grid } from '@material-ui/core';
 import ProjectsFilters from './components/ProjectsFilters';
 import ProjectsTable from './components/ProjectsTable';
 import ProjectsContext from './ProjectsContext';
@@ -24,27 +25,24 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div
-        style={{
-          margin: 'auto',
-          width: 800,
-          paddingTop: '2rem',
-          fontSize: 'large',
+    <div className="App-container">
+      <h1>Projects</h1>
+      <ProjectsContext.Provider
+        value={{
+          state,
+          dispatch,
         }}
       >
-        <h1>Projects</h1>
-        <ProjectsContext.Provider
-          value={{
-            state,
-            dispatch,
-          }}
-        >
-          <ProjectsFilters />
-          <ProjectsTable />
-        </ProjectsContext.Provider>
-      </div>
-    </>
+        <Grid container spacing={8} direction="row" justifyContent="center">
+          <Grid container item xs={12} lg={6} md={6} justifyContent="space-around">
+            <ProjectsFilters className="projects-filters" />
+          </Grid>
+          <Grid container item xs={12} lg={6} md={6} justifyContent="space-around">
+            <ProjectsTable className="projects-table" />
+          </Grid>
+        </Grid>
+      </ProjectsContext.Provider>
+    </div>
   );
 };
 export default App;
