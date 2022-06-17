@@ -1,4 +1,4 @@
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -39,7 +39,7 @@ const config = {
     extensions: ['', '.js', '.jsx'],
     alias: {
       src: path.resolve(__dirname, './src'),
-      components: path.resolve(__dirname, `${process.env.COMPONENT_PATH}`),
+      components: path.resolve(__dirname, './src/components/'),
       reducers: path.resolve(__dirname, './src/reducers/'),
     },
   },
@@ -53,6 +53,12 @@ const config = {
         comments: false,
       },
     ),
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      title: 'Squiz Developer Challenge',
+      filename: './index.html',
+      inject: 'body',
+    }),
   ],
 };
 
