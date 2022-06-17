@@ -1,3 +1,4 @@
+import React from 'react';
 const ProjectRow = ({ project }) => {
     return (
         <tr key={project.id}>

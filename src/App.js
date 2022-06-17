@@ -1,20 +1,21 @@
+// import * as esbuild from 'esbuild-wasm';
 import React, { useEffect } from 'react';
-import './App.scss';
-import { Grid } from '@material-ui/core';
 import ProjectsFilters from './components/ProjectsFilters';
 import ProjectsTable from './components/ProjectsTable';
 import ProjectsContext from './ProjectsContext';
-import projectsReducer from './Reducer';
+import { ProjectsReducer } from './reducers/ProjectsReducer';
+import './App.scss';
+import { Grid } from '@material-ui/core';
 
 const App = () => {
-  const [state, dispatch] = React.useReducer(projectsReducer, {
+  const [state, dispatch] = React.useReducer(ProjectsReducer, {
     projects: [],
     filter: '',
     order: 'dsc',
   });
 
   React.useEffect(() => {
-    fetch('http://localhost:3000/projects.json')
+    fetch('https://dujour.squiz.cloud/developer-challenge/data')
       .then((res) => res.json())
       .then((data) => {
         dispatch({
